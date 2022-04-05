@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import NavBar from './Components/NavBar/NavBar'
+import CardPresentation from './Components/CardPresentation/CardPresentation'
+import SmallCard from './Components/Card/Card'
+import Mode from './Components/Mode/Mode'
+import { useSelector } from 'react-redux'
 
-function App() {
+const App = () => {
+  const mode = useSelector((state) => state.knowledge.mode)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <section>
+      <NavBar></NavBar>
+      {mode && <Mode />}
+      <CardPresentation></CardPresentation>
+      <SmallCard></SmallCard>
+    </section>
+  )
 }
 
-export default App;
+export default App
