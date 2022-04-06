@@ -27,14 +27,14 @@ function SmallCard() {
         }}
       >
         <Card.Body>
-
           {startWith(point.link) ? (<ReactPlayer
           url={point.link}
           width='282px'
           height='159px'
           muted='false'
           playing= 'true'
-        ></ReactPlayer>) : (<Card.Img variant="top" src={CardImg} />)}
+        ></ReactPlayer>) : (<img src={CardImg} style={{width:'282px',
+        height:'159px'}}alt="..."></img>)}
 
           <Card.Header>
             <Card.Title>{point.technology}</Card.Title>
