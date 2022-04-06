@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addKnowledge, noValue } from '../../Data/KnowledgeSlice'
+import { addKnowledge, noValue} from '../../Data/KnowledgeSlice'
 
 function Form() {
   const dispatch = useDispatch()
@@ -26,7 +26,7 @@ function Form() {
           },
         })
       )
-
+      
       setUser('')
       setTechnology('')
       setTitle('')

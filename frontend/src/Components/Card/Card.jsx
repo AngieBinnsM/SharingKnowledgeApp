@@ -1,17 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deletee } from '../../Data/KnowledgeSlice'
+import { deletee} from '../../Data/KnowledgeSlice'
 import { Button } from 'react-bootstrap'
 import { Card } from 'react-bootstrap'
 import { body } from './style'
 import ReactPlayer from 'react-player'
+import CardImg from './CardImg.jpg'
 
 function SmallCard() {
   const know = useSelector((state) => state.knowledge.idea)
   const dispatch = useDispatch()
 
+  function startWith (str){
+    return str.startsWith('https://www.youtube.com/')
+  }
 
-
+  
   return (
     <section style={body}>
       {know.map((point) => (
@@ -23,13 +27,15 @@ function SmallCard() {
         }}
       >
         <Card.Body>
-          <ReactPlayer
-            url={point.link}
-            
-            width='282px'
-            height='159px'
-            muted='false'
-          ></ReactPlayer>
+
+          {startWith(point.link) ? (<ReactPlayer
+          url={point.link}
+          width='282px'
+          height='159px'
+          muted='false'
+          playing= 'true'
+        ></ReactPlayer>) : (<Card.Img variant="top" src={CardImg} />)}
+
           <Card.Header>
             <Card.Title>{point.technology}</Card.Title>
           </Card.Header>

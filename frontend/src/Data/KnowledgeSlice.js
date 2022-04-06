@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   idea: [],
   mode: false,
-  modeContent: '',
+  modeContent: ''
 }
 
 const customerSlice = createSlice({
@@ -43,7 +43,7 @@ const customerSlice = createSlice({
 })
 
 // Action creators for each reducer method
-export const { addKnowledge, noValue, noModeContent, deletee } =
+export const { addKnowledge, noValue, noModeContent, deletee} =
   customerSlice.actions
 
 export default customerSlice.reducer
