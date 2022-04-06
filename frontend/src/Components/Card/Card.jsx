@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap'
 import { Card } from 'react-bootstrap'
 import { body } from './style'
 import ReactPlayer from 'react-player'
-import CardImg from './CardImg.jpg'
+import CardImg from './CardImg3.jpg'
 
 function SmallCard() {
   const know = useSelector((state) => state.knowledge.idea)
@@ -33,8 +33,8 @@ function SmallCard() {
           height='159px'
           muted='false'
           playing= 'true'
-        ></ReactPlayer>) : (<img src={CardImg} style={{width:'282px',
-        height:'159px'}}alt="..."></img>)}
+        ></ReactPlayer>) : (<img src={CardImg} style={{width:'318px',
+          height:'159px', marginLeft: '-16px'}} alt="..."></img>)}
 
           <Card.Header>
             <Card.Title>{point.technology}</Card.Title>
