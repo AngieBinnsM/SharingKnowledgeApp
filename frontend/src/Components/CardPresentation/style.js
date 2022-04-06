@@ -24,6 +24,6 @@ export const thirdBody = {
   display: 'flex',
   paddingRight: '165px',
   marginLeft: "154px",
-  marginRight: "-63px"
+  justifyContent: "space-evenly"
 
 }

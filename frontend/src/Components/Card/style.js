@@ -2,8 +2,7 @@ export const body = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'baseline',
-    gap: '34px 30px',
+    gap: '47px 77px',
     flexWrap: 'wrap',
-    marginTop: '40px',
+    marginTop: '49px',
   }
