@@ -5,7 +5,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "mypgs-sandbox.tfstate"
-    key    = "sharing-knowldege-prod/terraform.tfstate"
+    key    = "sharing-knowledge-prod/terraform.tfstate"
     region = "us-east-1"
   }
 }
