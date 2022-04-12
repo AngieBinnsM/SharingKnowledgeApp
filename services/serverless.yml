@@ -4,7 +4,6 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: python3.8
-  stage: ${opt:stage}
 
   deploymentBucket:
     name: ${ssm:account_code_bucket_name}
@@ -15,10 +14,10 @@ provider:
       Action:
         - dynamodb:*
       Resource:
-        - arn:aws:dynamodb:us-east-1:435971970349:table/IdeasTable
+        - arn:aws:dynamodb:us-east-1:114660185804:table/IdeasTable
 
 package:
-  excludeDevDependencies: True
+  excludeDevDependencies: true
   exclude:
     - package.json
     - package-lock.json

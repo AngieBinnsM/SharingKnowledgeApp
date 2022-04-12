@@ -6,7 +6,7 @@ from boto3.dynamodb.conditions import Key
 def handler(event, context):
 
     client = boto3.resource("dynamodb")
-    table = client.Table('Sharing-Knowledge-App')
+    table = client.Table('IdeasTable')
 
     try:
         result = table.query(
