@@ -43,12 +43,33 @@ functions:
     handler: get-ideas.handler
     events:
       - http:
-          path: /ideas
+          path: /get-ideas
           method: get
           cors:
             origins:
               - "*"
             allowCredentials: true
 
+  put-ideas:
+    handler: put-ideas.handler
+    events:
+      - http:
+          path: /put-ideas
+          method: put
+          cors:
+            origins:
+              - "*"
+            allowCredentials: true
+
+  delete-idea:
+    handler: delete-idea.handler
+    events:
+      - http:
+          path: /delete-idea
+          method: delete
+          cors:
+            origins:
+              - "*"
+            allowCredentials: true
 plugins:
   - serverless-python-requirements
