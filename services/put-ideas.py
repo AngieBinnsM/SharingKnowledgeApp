@@ -20,7 +20,7 @@ def handler(event, context):
         table.put_item(
             Item = {
                 "pk": "#Ideas",
-                "sk": f"#{id}#{technology}#{user}",
+                "sk": f"#{technology}#{id}",
                 "id": id,
                 "user": user,
                 "technology": technology,

@@ -6,13 +6,14 @@ def handler (event,context):
 
     client = boto3.resource("dynamodb")
     table = client.Table('IdeasTable')
+    technology = event['queryStringParameters']['technology']
     id = event['queryStringParameters']['id']
 
     try:
         response = table.query(
             ExpressionAttributeValues={
                 ':idea': "#Ideas",
-                ':idea_id': f"#{id}"
+                ':idea_id': f"#{technology}#{id}"
             },
             KeyConditionExpression='pk=:idea and begins_with(sk, :idea_id)'        
         )

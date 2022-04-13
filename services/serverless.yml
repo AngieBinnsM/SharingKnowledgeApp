@@ -71,5 +71,16 @@ functions:
             origins:
               - "*"
             allowCredentials: true
+
+  get-technologys:
+    handler: get-technologys.handler
+    events:
+      - http:
+          path: /get-technologys
+          method: get
+          cors:
+            origins:
+              - "*"
+            allowCredentials: true
 plugins:
   - serverless-python-requirements
