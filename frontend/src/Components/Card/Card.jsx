@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deletee } from "../../Data/KnowledgeSlice";
 import { Button } from "react-bootstrap";
@@ -6,10 +6,15 @@ import { Card } from "react-bootstrap";
 import { body } from "./style";
 import ReactPlayer from "react-player";
 import CardImg from "./CardImg3.jpg";
+import { getIdeas } from "../../Data/KnowledgeSlice";
 
 function SmallCard() {
   const know = useSelector((state) => state.knowledge.idea);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getIdeas());
+  }, [dispatch]);
 
   function startWith(str) {
     return str.startsWith("https://www.youtube.com/");
