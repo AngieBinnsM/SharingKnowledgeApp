@@ -15,25 +15,7 @@ def handler(event, context):
 
         ideas = result["Items"]
 
-        ideas_response = []
-
-
-        for idea in ideas:
-            obj = {
-               "id": idea["id"],
-               "user": idea["user"],
-               "technology": idea["technology"],
-               "title": idea["title"],
-               "link": idea["link"],
-               "description": idea["description"]
-            }
-            ideas_response.append(obj)
-
-        response = {
-            "ideas" : ideas_response
-        }
-
-        return http_success(response)
+        return http_success(ideas)
 
     except:
         return http_internal_error()
