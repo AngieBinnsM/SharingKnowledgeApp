@@ -1,13 +1,15 @@
 import boto3
 from helper import http_success,http_internal_error
+import json
 
 
 def handler (event,context):
+    print("event:", json.dumps(event))
 
     client = boto3.resource("dynamodb")
     table = client.Table('IdeasTable')
-    technology = event['queryStringParameters']['technology']
-    id = event['queryStringParameters']['id']
+    technology = event['pathParameters']['technology']
+    id = event['pathParameters']['id']
 
     try:
         response = table.query(
