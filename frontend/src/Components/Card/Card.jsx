@@ -6,7 +6,7 @@ import { Card } from "react-bootstrap";
 import { body } from "./style";
 import ReactPlayer from "react-player";
 import CardImg from "./CardImg3.jpg";
-import { getIdeas } from "../../Data/KnowledgeSlice";
+import { getIdeas, deleteIdea } from "../../Data/KnowledgeSlice";
 
 function SmallCard() {
   const know = useSelector((state) => state.knowledge.idea);
@@ -64,7 +64,11 @@ function SmallCard() {
             </a>
             <Button
               variant="primary"
-              onClick={() => dispatch(deletee({ id: point.id }))}
+              onClick={() =>
+                dispatch(
+                  deleteIdea({ technology: point.technology, id: point.id })
+                )
+              }
             >
               Delete
             </Button>

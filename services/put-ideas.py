@@ -30,8 +30,16 @@ def handler(event, context):
             }
         )
 
-    
-        return http_success({'body':'Successfully added item!'})
+        idea = {
+                "id": id,
+                "user": user,
+                "technology": technology,
+                "title": title,
+                "link": link,
+                "description": description
+            }
+        
+        return http_success(idea)
 
     except:
         return http_internal_error()
