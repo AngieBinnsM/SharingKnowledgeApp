@@ -27,8 +27,10 @@ def handler (event,context):
                     'sk': item['sk']
                 }
             )
+        
+        idIdea = {"id": id}
 
-        return http_success({'body':'Successfully deleted item!'})
+        return http_success(idIdea)
 
     except:
         return http_internal_error()
