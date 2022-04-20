@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deletee } from "../../Data/KnowledgeSlice";
 import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { body } from "./style";
@@ -11,6 +10,7 @@ import { getIdeas, deleteIdea } from "../../Data/KnowledgeSlice";
 function SmallCard() {
   const know = useSelector((state) => state.knowledge.idea);
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     dispatch(getIdeas());

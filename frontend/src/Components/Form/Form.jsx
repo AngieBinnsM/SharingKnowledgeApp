@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addKnowledge, noValue } from "../../Data/KnowledgeSlice";
+import { noValue } from "../../Data/KnowledgeSlice";
 import { putIdea } from "../../Data/KnowledgeSlice";
 
 function Form() {

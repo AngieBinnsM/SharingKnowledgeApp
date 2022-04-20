@@ -8,8 +8,8 @@ def handler (event,context):
 
     client = boto3.resource("dynamodb")
     table = client.Table('IdeasTable')
-    technology = event['pathParameters']['technology']
-    id = event['pathParameters']['id']
+    technology = event["queryStringParameters"]['technology']
+    id = event["queryStringParameters"]['id']
 
     try:
         response = table.query(

@@ -34,9 +34,12 @@ export const deleteIdea = createAsyncThunk(
   "ideas/deleteIdea",
   async (payload) => {
     return await fetch(
-      `https://cbx3peeaah.execute-api.us-east-1.amazonaws.com/dev/delete-idea/${payload.technology}/${payload.id}`,
+      `https://cbx3peeaah.execute-api.us-east-1.amazonaws.com/dev/delete-idea?technology=${payload.technology}&id=${payload.id}`,
       {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     ).then((res) => res.json());
   }
@@ -57,12 +60,6 @@ const customerSlice = createSlice({
 
   // Reducer methods
   reducers: {
-    addKnowledge: (state, action) => {
-      state.idea.push(action.payload.load);
-      state.mode = true;
-      state.modeContent = "New knowledge added";
-    },
-
     noValue: (state) => {
       state.mode = true;
       state.modeContent = "Please write your discovery";
@@ -70,16 +67,6 @@ const customerSlice = createSlice({
 
     noModeContent: (state) => {
       state.mode = false;
-    },
-
-    deletee: (state, action) => {
-      const newItem = state.idea.filter(
-        (point) => point.id !== action.payload.id
-      );
-      return {
-        ...state,
-        idea: newItem,
-      };
     },
   },
 
