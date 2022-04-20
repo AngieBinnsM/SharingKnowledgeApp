@@ -9,7 +9,7 @@ def handler (event,context):
     table = client.Table('IdeasTable')
 
     try:
-        technology = event['pathParameters']['technology']
+        technology = event["queryStringParameters"]['technology']
         
         result = table.query(
             ExpressionAttributeValues={

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import { body, card } from "./style";
+import { body, card, search, enter } from "./style";
 import ReactPlayer from "react-player";
 import CardImg from "./CardImg.jpg";
 import { getIdeas, deleteIdea } from "../../Data/KnowledgeSlice";
@@ -22,14 +22,17 @@ function SmallCard() {
 
   return (
     <section>
-      <div>
+      <div style={search}>
         <input
+          class="form-control"
+          style={enter}
           type="text"
           placeholder="Search Technology..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
+
       <div style={body}>
         {know
           .filter((point) => {
