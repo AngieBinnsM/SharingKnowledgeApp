@@ -1,4 +1,4 @@
-import searchIcon from "./searchicon.png";
+import searchIcon from "./search-icon.png";
 
 export const body = {
   display: "flex",
@@ -23,11 +23,15 @@ export const search = {
 export const enter = {
   width: "415px",
   height: "55px",
-  color: "white",
+  color: "gray",
   backgroundImage: `url(${searchIcon})`,
   backgroundPosition: "9px 19px",
   backgroundRepeat: "no-repeat",
   backgroundSize: "15px 16px",
   backgroundColor: "#f9f9f9",
   paddingLeft: "33px",
+  outline: "none",
+  boxShadow: "0 0 12px rgba(0,0,0,0.5)",
+  borderColor: "transparent",
+  marginTop: "33px",
 };
