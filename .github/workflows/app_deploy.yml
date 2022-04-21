@@ -1,0 +1,91 @@
+name: Deployment Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  changes:
+
+  terraform:
+    runs-on: ubuntu-20.04
+    name: "Terraform"
+    steps:
+      - uses: fusion-engineering/setup-git-credentials@v2 # Agregar credenciales de git para que el job pueda leer el codigo de este mismo repo.
+        with:
+          credentials: https://${{secrets.INNERSOURCE_READ_USER}}:${{secrets.INNERSOURCE_READ_PAT}}@github.com/
+      - uses: actions/checkout@master # Para copiar este mismo codigo al servidor runner
+      - name: Configure AWS Credentials # Agregar credenciales de AWS para que el runner realice deployments a AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          aws-region: us-east-1
+      - uses: hashicorp/setup-terraform@v1 #instalar terraform
+        with:
+          terraform_version: 1.1.7
+
+      - name: Terraform Format #Chequear si la configuracion se ha formateado bien
+        id: fmt
+        run: terraform fmt -check
+
+      - name: "Terraform Init"
+        id: init
+        run: terraform init -backend-config="bucket=terraform-state-385977526288"
+        working-directory: SharingKnowledgeApp/terraform
+        env:
+          TF_WORKSPACE: "dev"
+
+      - name: "Terraform Apply"
+        id: apply
+        run: terraform apply -auto-approve
+        working-directory: SharingKnowledgeApp/terraform
+        env:
+          TF_WORKSPACE: "dev"
+
+  serverless-services:
+    runs-on: ubuntu-20.04
+    name: "serverless services"
+    steps:
+      - uses: fusion-engineering/setup-git-credentials@v2
+        with:
+          credentials: https://${{secrets.INNERSOURCE_READ_USER}}:${{secrets.INNERSOURCE_READ_PAT}}@github.com/
+      - uses: actions/checkout@master
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          aws-region: us-east-1
+      - name: "Setup Node"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "17.8.0"
+      - name: "Install Serverless"
+        run: npm install -g serverless
+      - name: "Setup Python 3.8"
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: "Serverless Deploy"
+        run: sls deploy
+        working-directory: SharingKnowledgeApp/services
+
+  frontend:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: fusion-engineering/setup-git-credentials@v2
+        with:
+          credentials: https://${{secrets.INNERSOURCE_READ_USER}}:${{secrets.INNERSOURCE_READ_PAT}}@github.com/
+        uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "17.8.0"
+      - name: "NPM Install Frontend"
+        working-directory: SharingKnowledgeApp/frontend
+        run: npm install
+      - name: "Deploy Frontend"
+        working-directory: SharingKnowledgeApp/frontend
+        run: npm start
