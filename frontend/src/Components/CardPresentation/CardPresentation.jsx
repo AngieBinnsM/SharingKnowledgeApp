@@ -2,11 +2,11 @@ import React from "react";
 import img from "./icon2.png";
 import Form from "../Form/Form";
 import { Card } from "react-bootstrap";
-import { body, secondBody, thirdBody } from "./style";
+import { secondBody, thirdBody } from "./style";
 
 function CardPresentation() {
   return (
-    <div style={body}>
+    <div>
       <div style={thirdBody}>
         <Card style={secondBody}>
           <img src={img} alt="" style={{ width: "250px", margin: "20px" }} />

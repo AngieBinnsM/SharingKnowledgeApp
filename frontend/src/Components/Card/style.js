@@ -21,15 +21,15 @@ export const search = {
 };
 
 export const enter = {
-  width: "415px",
+  width: "490px",
   height: "55px",
   color: "gray",
   backgroundImage: `url(${searchIcon})`,
-  backgroundPosition: "9px 19px",
+  backgroundPosition: "9px 17px",
   backgroundRepeat: "no-repeat",
-  backgroundSize: "15px 16px",
+  backgroundSize: "21px 19px",
   backgroundColor: "#f9f9f9",
-  paddingLeft: "33px",
+  paddingLeft: "39px",
   outline: "none",
   boxShadow: "0 0 12px rgba(0,0,0,0.5)",
   borderColor: "transparent",
