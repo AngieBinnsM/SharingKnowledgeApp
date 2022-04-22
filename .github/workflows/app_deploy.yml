@@ -19,7 +19,7 @@ jobs:
       - uses: dorny/paths-filter@v2.2.1
         id: filter
         with:
-          base: main
+          base: main # El branch donde lo contiene
           filters: |
             terraform:
               - 'terraform/**'
@@ -37,7 +37,7 @@ jobs:
       - uses: fusion-engineering/setup-git-credentials@v2 # Agregar credenciales de git para que el job pueda leer el codigo de este mismo repo.
         with:
           credentials: https://${{secrets.INNERSOURCE_READ_USER}}:${{secrets.INNERSOURCE_READ_PAT}}@github.com/
-      - uses: actions/checkout@main # Para copiar este mismo codigo al servidor runner
+      - uses: actions/checkout@main # Para copiar este mismo codigo al servidor runner (esta ocacion seria main)
       - name: Configure AWS Credentials # Agregar credenciales de AWS para que el runner realice deployments a AWS
         uses: aws-actions/configure-aws-credentials@v1
         with:
