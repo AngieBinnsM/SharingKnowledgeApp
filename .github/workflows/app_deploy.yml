@@ -58,9 +58,9 @@ jobs:
         env:
           TF_WORKSPACE: "dev"
 
-      - name: "Terraform Apply"
+      - name: "Terraform Plan"
         id: apply
-        run: terraform apply -auto-approve
+        run: terraform plan
         working-directory: terraform
         env:
           TF_WORKSPACE: "dev"
