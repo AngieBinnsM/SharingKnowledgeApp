@@ -94,7 +94,7 @@ jobs:
       - name: "Pip Install testing dependencies"
         run: |
           python -m pip install --upgrade pip
-      - name: ""serverless-python-requirements""
+      - name: "serverless-python-requirements"
         run: |
           serverless plugin install -n serverless-python-requirements
       - name: "Serverless Deploy"
