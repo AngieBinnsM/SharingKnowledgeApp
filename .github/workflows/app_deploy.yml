@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: App Deployment Pipeline
 
 on:
   pull_request:
@@ -7,8 +7,30 @@ on:
 
 jobs:
   changes:
+    runs-on: ubuntu-20.04
+    outputs:
+      terraform: ${{ steps.filter.outputs.terraform }}
+      serverless: ${{ steps.filter.outputs.serverless}}
+      frontend: ${{ steps.filter.outputs.frontend }}
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2.2.1
+        id: filter
+        with:
+          base: dev
+          filters: |
+            terraform:
+              - 'terraform/**'
+            serverless:
+              - 'services/**'
+            frontend:
+              - 'frontend/**'
 
   terraform:
+    needs: changes
+    if: ${{ needs.changes.outputs.terraform == 'true' }}
     runs-on: ubuntu-20.04
     name: "Terraform"
     steps:
@@ -32,21 +54,23 @@ jobs:
 
       - name: "Terraform Init"
         id: init
-        run: terraform init -backend-config="bucket=terraform-state-385977526288"
-        working-directory: SharingKnowledgeApp/terraform
+        run: terraform init
+        working-directory: terraform
         env:
           TF_WORKSPACE: "dev"
 
       - name: "Terraform Apply"
         id: apply
-        run: terraform apply -auto-approve
-        working-directory: SharingKnowledgeApp/terraform
+        run: terraform apply
+        working-directory: terraform
         env:
           TF_WORKSPACE: "dev"
 
-  serverless-services:
+  serverless:
+    needs: [changes, terraform]
+    if: ${{ always() && needs.changes.outputs.serverless == 'true' }}
     runs-on: ubuntu-20.04
-    name: "serverless services"
+    name: "serverless"
     steps:
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -70,22 +94,22 @@ jobs:
           python-version: "3.8"
       - name: "Serverless Deploy"
         run: sls deploy
-        working-directory: SharingKnowledgeApp/services
+        working-directory: services
 
   frontend:
+    needs: changes
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
     runs-on: ubuntu-20.04
     steps:
-      - uses: fusion-engineering/setup-git-credentials@v2
-        with:
-          credentials: https://${{secrets.INNERSOURCE_READ_USER}}:${{secrets.INNERSOURCE_READ_PAT}}@github.com/
-        uses: actions/checkout@master
+      - name: Git checkout
+        uses: actions/checkout@v2
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: "17.8.0"
       - name: "NPM Install Frontend"
-        working-directory: SharingKnowledgeApp/frontend
+        working-directory: frontend
         run: npm install
       - name: "Deploy Frontend"
-        working-directory: SharingKnowledgeApp/frontend
+        working-directory: frontend
         run: npm start
