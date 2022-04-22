@@ -82,5 +82,3 @@ functions:
             origins:
               - "*"
             allowCredentials: true
-plugins:
-  - serverless-python-requirements
