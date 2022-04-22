@@ -57,14 +57,14 @@ jobs:
         run: terraform init
         working-directory: terraform
         env:
-          TF_WORKSPACE: "main"
+          TF_WORKSPACE: "dev"
 
       - name: "Terraform Apply"
         id: apply
         run: terraform apply
         working-directory: terraform
         env:
-          TF_WORKSPACE: "main"
+          TF_WORKSPACE: "dev"
 
   serverless:
     needs: [changes, terraform]
