@@ -16,6 +16,9 @@ Developer Tools to power-up Redux development workflow or any other architecture
 
 It can be used as a browser extension (for Chrome, Edge and Firefox), as a standalone app or as a React component integrated in the client app.
 
+This tool allows us to see the state of each activity that occurs in the form of a tree, chart, and raw. As you can see in the images.
+
+
 
 
 
