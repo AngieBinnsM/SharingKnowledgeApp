@@ -26,12 +26,12 @@ This tool allows us to see the state of each activity that occurs in the form of
 
 # Installation
 
-## 1.For Chrome
+### 1.For Chrome
 
 - from [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
-## 2. With Redux in Visual Studios
+### 2. With Redux in Visual Studios
 
 - Npm package to install: npm install --save @redux-devtools/extension
 
-[For more information about Redux DevTools](https://redux-toolkit.js.org/api/createAsyncThunk)
+[For more information about Redux DevTools](https://github.com/reduxjs/redux-devtools)
