@@ -11,7 +11,6 @@ jobs:
     outputs:
       terraform: ${{ steps.filter.outputs.terraform }}
       serverless: ${{ steps.filter.outputs.serverless}}
-      frontend: ${{ steps.filter.outputs.frontend }}
 
     steps:
       - name: Git checkout
@@ -88,28 +87,13 @@ jobs:
           node-version: "17.8.0"
       - name: "Install Serverless"
         run: npm install -g serverless
-      - name: "Setup Python 3.8"
+      - name: "Setup Python 3.7"
         uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
+          python-version: "3.7"
+      - name: "Pip Install testing dependencies"
+        run: |
+          python -m pip install --upgrade pip
       - name: "Serverless Deploy"
         run: sls deploy
         working-directory: services
-
-  frontend:
-    needs: changes
-    if: ${{ needs.changes.outputs.frontend == 'true' }}
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Git checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: "17.8.0"
-      - name: "NPM Install Frontend"
-        working-directory: frontend
-        run: npm install
-      - name: "Deploy Frontend"
-        working-directory: frontend
-        run: npm start
