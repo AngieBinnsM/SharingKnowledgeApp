@@ -1,6 +1,6 @@
 # SharingKnowledgeApp
 
-Sharing Knowledge App uses Redux Toolkit to store data in only one place so can every component or element can have access to it. 
+Sharing Knowledge App uses Redux Toolkit to store data in only one place so can every component or element can have access to it.
 
 I am going to share these two links that explain how does Redux Toolkit works and helps me a lot to understand:
 
@@ -18,14 +18,4 @@ It can be used as a browser extension (for Chrome, Edge and Firefox), as a stand
 
 This tool allows us to see the state of each activity that occurs in the form of a tree, chart, and raw. As you can see in the images.
 
-
-
-
-
-
-
-
-
-
-
-
+![tree!](tree-img.JPG)
