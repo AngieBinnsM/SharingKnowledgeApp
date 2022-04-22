@@ -61,7 +61,7 @@ jobs:
 
       - name: "Terraform Apply"
         id: apply
-        run: terraform apply
+        run: terraform apply -y
         working-directory: terraform
         env:
           TF_WORKSPACE: "dev"
