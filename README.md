@@ -1,4 +1,4 @@
-# SharingKnowledgeApp
+# Sharing Knowledge App
 
 Sharing Knowledge App uses Redux Toolkit to store data in only one place so can every component or element can have access to it.
 
@@ -19,3 +19,19 @@ It can be used as a browser extension (for Chrome, Edge and Firefox), as a stand
 This tool allows us to see the state of each activity that occurs in the form of a tree, chart, and raw. As you can see in the images.
 
 ![tree!](tree-img.JPG)
+
+![chart!](chart-img.JPG)
+
+![raw!](raw-img.JPG)
+
+# Installation
+
+## 1.For Chrome
+
+- from [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
+## 2. With Redux in Visual Studios
+
+- Npm package to install: npm install --save @redux-devtools/extension
+
+[For more information about Redux DevTools](https://redux-toolkit.js.org/api/createAsyncThunk)
