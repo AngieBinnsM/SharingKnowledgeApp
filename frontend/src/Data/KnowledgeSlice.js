@@ -94,7 +94,6 @@ const customerSlice = createSlice({
 });
 
 // Action creators for each reducer method
-export const { addKnowledge, noValue, noModeContent, deletee } =
-  customerSlice.actions;
+export const { noValue, noModeContent } = customerSlice.actions;
 
 export default customerSlice.reducer;
