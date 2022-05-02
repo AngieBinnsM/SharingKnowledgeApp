@@ -18,3 +18,7 @@ var/
 
 # Serverless directories
 .serverless
+
+.pytest_cache
+
+__pycache__/

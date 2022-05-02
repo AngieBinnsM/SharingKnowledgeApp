@@ -2,7 +2,6 @@ import boto3
 from helper import (http_success, http_internal_error)
 from boto3.dynamodb.conditions import Key
 
-
 def handler(event, context):
 
     client = boto3.resource("dynamodb")
@@ -27,6 +26,7 @@ def handler(event, context):
                 "description": idea["description"]
             }
             ideas_response.append(obj)
+        
 
         return http_success(ideas_response)
 
