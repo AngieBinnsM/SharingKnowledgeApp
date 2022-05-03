@@ -1,6 +1,8 @@
 import os
+
 import boto3
 import pytest
+
 from moto import mock_dynamodb
 
 os.environ['DYNAMODB_TABLE'] = 'test-table'
@@ -15,19 +17,16 @@ def aws_credentials():
     os.environ['AWS_SESSION_TOKEN'] = 'testing'
 
 @pytest.fixture(scope='function')
-def dynamodb_table(aws_credentials):
-    
+def dynamodb(aws_credentials):
     with mock_dynamodb():
-        table_name= os.environ["DYNAMODB_TABLE"]
-        print(table_name)
-        dynamodb = boto3.resource(
-            'dynamodb', 
-            region_name='us-east-1', 
-            aws_access_key_id="ak",
-            aws_secret_access_key="sk",
-        )
+        conn = boto3.resource('dynamodb', region_name='us-east-1')
+        yield conn
+
+@pytest.fixture(scope='function')
+def dynamodb_table(dynamodb):
+    try:
         dynamodb.create_table(
-        TableName= table_name,
+        TableName= os.environ['DYNAMODB_TABLE'],
         KeySchema=[
             {
                 'AttributeName': 'PK',
@@ -49,12 +48,22 @@ def dynamodb_table(aws_credentials):
             }
         ],
         ProvisionedThroughput={
-            'ReadCapacityUnits': 5,
-            'WriteCapacityUnits': 5
-        }
-    )
+            'ReadCapacityUnits': 1,
+            'WriteCapacityUnits': 1
+        }  
+        )
+        return True
+
+    except:
+        return False
+        
+
+        
+       
     
-    yield dynamodb
+        
+    
+        
 
             
     

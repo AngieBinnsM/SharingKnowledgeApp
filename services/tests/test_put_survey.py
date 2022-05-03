@@ -1,7 +1,5 @@
-import boto3
 from put_survey import put_survey
-import os
-
+from conftest import dynamodb_table
 class StubSurvey:
 
     def __init__(self):
@@ -16,13 +14,9 @@ class StubSurvey:
             "survey_data": {"TEST": "DATA"}
         }
 
-# Create a function to return a DynamoDB table to isolate the tests from live infrastructure.
-def mocked_table():
-    dynamodb = boto3.resource("dynamodb", region_name='us-east-1')
-    table = dynamodb.Table(os.environ["DYNAMODB_TABLE"])
-    return table
 
-def test_create_survey():
+def test_create_survey(dynamodb_table):
     survey_instance = StubSurvey()
-    table = mocked_table()
-    assert put_survey(survey=survey_instance, table=table) == survey_instance
+    assert dynamodb_table == True
+    assert put_survey(survey=survey_instance) == survey_instance
+    
