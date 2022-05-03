@@ -1,7 +1,8 @@
-from put_survey import put_survey
-from conftest import dynamodb_table
+from surveys import put_survey, get_survey
 import boto3
 import os
+
+
 
 class StubSurvey:
 
@@ -23,9 +24,10 @@ def mocked_table():
     table = dynamodb.Table(os.environ["DYNAMODB_TABLE"])
     return table
 
-def test_create_survey(dynamodb_table):
+def test_create_survey():
     survey_instance = StubSurvey()
     table = mocked_table()
-    assert dynamodb_table == True
+    
     assert put_survey(survey=survey_instance, table = table ) == survey_instance
+    assert get_survey(table = table) == survey_instance.to_item()
     

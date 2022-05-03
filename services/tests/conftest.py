@@ -24,8 +24,7 @@ def dynamodb(aws_credentials):
 
 @pytest.fixture(scope='function')
 def dynamodb_table(dynamodb):
-    try:
-        dynamodb.create_table(
+    dynamodb.create_table(
         TableName= os.environ['DYNAMODB_TABLE'],
         KeySchema=[
             {
@@ -52,10 +51,12 @@ def dynamodb_table(dynamodb):
             'WriteCapacityUnits': 1
         }  
         )
-        return True
+        
+    return dynamodb
+    
+        
 
-    except:
-        return False
+   
         
 
         

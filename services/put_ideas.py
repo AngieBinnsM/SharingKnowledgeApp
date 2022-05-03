@@ -9,12 +9,8 @@ def handler(event, context):
     table = client.Table('IdeasTable')
 
     json_event = json.loads(event['body'])
-    id = json_event['id']
-    user = json_event['user']
-    technology = json_event['technology']
-    title = json_event['title']
-    link = json_event['link']
-    description = json_event['description']
+    id, user, technology, title, link, description = json_event.values()
+    
 
     try:
         table.put_item(

@@ -51,7 +51,7 @@ functions:
             allowCredentials: true
 
   put-ideas:
-    handler: put-ideas.handler
+    handler: put_ideas.handler
     events:
       - http:
           path: /put-ideas
