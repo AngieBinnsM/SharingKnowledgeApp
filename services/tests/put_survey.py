@@ -1,16 +1,16 @@
 import os
 import boto3
-from moto import mock_dynamodb
 
-# Create a function to return a DynamoDB table to isolate the tests from live infrastructure.
+
 def get_Table():
-    with mock_dynamodb():
-        dynamo = boto3.resource("dynamodb", region_name= os.environ['AWS_DEFAULT_REGION'])
-        table = dynamo.Table(os.environ["DYNAMODB_TABLE"])
-        return table
+    dynamo = boto3.resource("dynamodb", region_name= os.environ['AWS_DEFAULT_REGION'])
+    table = dynamo.Table(os.environ["DYNAMODB_TABLE"])
+    return table
+        
+default_table = get_Table()
 
 #The function to test
-def put_survey( survey=None, table = get_Table() ):
+def put_survey( survey=None, table = default_table ):
     try:
         table.put_item(
             Item=survey.to_item()
