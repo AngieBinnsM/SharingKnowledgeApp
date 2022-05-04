@@ -33,6 +33,8 @@ def test_create_survey(dynamodb_table):
 
     assert handler(event= to_item(), table = table, context={}) == json.loads(evento['body'])
 
+    # Verify if the item was store
+
     respond = table.get_item(
             Key={
                 "pk": "#Ideas",
