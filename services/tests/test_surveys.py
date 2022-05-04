@@ -1,22 +1,23 @@
-from surveys import put_survey, get_survey
+from conftest import dynamodb_table
+from put_idea_test import handler
 import boto3
+import json
 import os
 
-
-
-class StubSurvey:
-
-    def __init__(self):
-        pass
-    
-    def to_item(self):
-        return {
-            "PK": "CUSTOMER#TEST1",
-            "SK": "SURVEY#TEST1",
-            "customer_id": "TEST1",
-            "survey_id": "TEST1",
-            "survey_data": {"TEST": "DATA"}
+# Event test
+def to_item():
+    test_event = {
+        "body": json.dumps({
+                "id": '1649426976418',
+                "user": 'Raul',
+                "technology": 'DynamoDB',
+                "title": 'Single-Table Design with DynamoDB - Alex DeBrie, AWS Data Hero',
+                "link": 'https://www.youtube.com/watch?v=BnDKD_Zv0og',
+                "description": 'Its great for beginners'
+            })
         }
+        
+    return test_event  
 
 # Create a function to return a DynamoDB table to isolate the tests from live infrastructure.
 def mocked_table():
@@ -24,10 +25,32 @@ def mocked_table():
     table = dynamodb.Table(os.environ["DYNAMODB_TABLE"])
     return table
 
-def test_create_survey():
-    survey_instance = StubSurvey()
+#Test function
+def test_create_survey(dynamodb_table):
     table = mocked_table()
+    evento = to_item()
     
-    assert put_survey(survey=survey_instance, table = table ) == survey_instance
-    assert get_survey(table = table) == survey_instance.to_item()
+
+    assert handler(event= to_item(), table = table, context={}) == json.loads(evento['body'])
+
+    respond = table.get_item(
+            Key={
+                "pk": "#Ideas",
+                "sk": "#DynamoDB#1649426976418",
+            }
+        )
+    assert respond["Item"] == {"pk": "#Ideas",
+                "sk": "#DynamoDB#1649426976418",
+                "id": '1649426976418',
+                "user": 'Raul',
+                "technology": 'DynamoDB',
+                "title": 'Single-Table Design with DynamoDB - Alex DeBrie, AWS Data Hero',
+                "link": 'https://www.youtube.com/watch?v=BnDKD_Zv0og',
+                "description": 'Its great for beginners'}
+    
+
+    
+    
+
+    
     

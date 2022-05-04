@@ -1,11 +1,6 @@
 import json
-import boto3
-from helper import http_success,http_internal_error
 
-def handler(event, context):
-
-    client = boto3.resource("dynamodb")
-    table = client.Table('IdeasTable')
+def handler(event, table, context ):
 
     json_event = json.loads(event['body'])
     id, user, technology, title, link, description = json_event.values()
@@ -33,10 +28,10 @@ def handler(event, context):
                 "description": description
             }
         
-        return http_success(idea)
+        return idea
 
     except:
-        return http_internal_error()
+        return False
 
         
 

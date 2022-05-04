@@ -28,21 +28,21 @@ def dynamodb_table(dynamodb):
         TableName= os.environ['DYNAMODB_TABLE'],
         KeySchema=[
             {
-                'AttributeName': 'PK',
+                'AttributeName': 'pk',
                 'KeyType': 'HASH'
             },
             {
-                'AttributeName': 'SK',
+                'AttributeName': 'sk',
                 'KeyType': 'HASH'
             }
         ],
         AttributeDefinitions=[
             {
-                'AttributeName': 'PK',
+                'AttributeName': 'pk',
                 'AttributeType': 'S'
             },
             {
-                'AttributeName': 'SK',
+                'AttributeName': 'sk',
                 'AttributeType': 'S'
             }
         ],
@@ -52,7 +52,7 @@ def dynamodb_table(dynamodb):
         }  
         )
         
-    return dynamodb
+    yield dynamodb
     
         
 
