@@ -28,17 +28,6 @@ package:
     - ../__init__.py-
 
 functions:
-  test-ideas:
-    handler: test-ideas.test
-    events:
-      - http:
-          path: /test-ideas
-          method: get
-          cors:
-            origins:
-              - "*"
-            allowCredentials: true
-
   get-ideas:
     handler: get-ideas.handler
     events:
@@ -67,17 +56,6 @@ functions:
       - http:
           path: /delete-idea
           method: delete
-          cors:
-            origins:
-              - "*"
-            allowCredentials: true
-
-  get-technologys:
-    handler: get-technologys.handler
-    events:
-      - http:
-          path: /get-technologys
-          method: get
           cors:
             origins:
               - "*"
